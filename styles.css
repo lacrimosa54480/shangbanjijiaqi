@@ -90,6 +90,10 @@ body::before {
   font-size: 0.96rem;
 }
 
+.section-title p.is-error {
+  color: #a14b22;
+}
+
 .controls-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -171,6 +175,12 @@ body::before {
   background: linear-gradient(90deg, var(--deep-green), #22866d);
   color: #fff;
   font-weight: 700;
+}
+
+.primary-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .summary-panel {

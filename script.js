@@ -65,6 +65,8 @@ const monthlySalaryInput = document.querySelector("#monthlySalary");
 const startTimeInput = document.querySelector("#startTime");
 const endTimeInput = document.querySelector("#endTime");
 const editButton = document.querySelector("#editButton");
+const startButton = document.querySelector("#startButton");
+const settingsHint = document.querySelector("#settingsHint");
 
 const todayProgressText = document.querySelector("#todayProgressText");
 const todayStatusText = document.querySelector("#todayStatusText");
@@ -208,6 +210,30 @@ function updateView() {
   summaryPanel.classList.toggle("is-hidden", !showSummary);
 }
 
+function updateFormState() {
+  const monthlySalary = Number(monthlySalaryInput.value) || 0;
+  const startMinutes = parseTimeToMinutes(startTimeInput.value);
+  const endMinutes = parseTimeToMinutes(endTimeInput.value);
+  const valid = monthlySalary > 0 && endMinutes > startMinutes;
+
+  startButton.disabled = !valid;
+
+  if (monthlySalary <= 0) {
+    settingsHint.classList.add("is-error");
+    settingsHint.textContent = "先输入有效月薪，才能进入今日进度页。";
+    return;
+  }
+
+  if (endMinutes <= startMinutes) {
+    settingsHint.classList.add("is-error");
+    settingsHint.textContent = "下班时间需要晚于上班时间。";
+    return;
+  }
+
+  settingsHint.classList.remove("is-error");
+  settingsHint.textContent = "你的输入会自动保存在当前浏览器里。";
+}
+
 function updateDashboard() {
   const now = new Date();
   const monthlySalary = Number(monthlySalaryInput.value) || 0;
@@ -257,6 +283,7 @@ function hydrateForm() {
 
 form.addEventListener("input", () => {
   saveSettings();
+  updateFormState();
   updateDashboard();
   updateView();
 });
@@ -267,6 +294,7 @@ form.addEventListener("submit", (event) => {
   if (!hasValidSettings()) {
     configured = false;
     saveSettings();
+    updateFormState();
     updateDashboard();
     updateView();
     return;
@@ -285,6 +313,7 @@ editButton.addEventListener("click", () => {
 });
 
 hydrateForm();
+updateFormState();
 updateDashboard();
 updateView();
 setInterval(updateDashboard, 1000);
