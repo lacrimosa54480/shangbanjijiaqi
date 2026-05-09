@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>上班计价器</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero">
+        <h1>上班计价器</h1>
+      </section>
+
+      <section id="controlsPanel" class="panel controls-panel">
+        <div class="section-title">
+          <h2>基础设置</h2>
+          <p>你的输入会自动保存在当前浏览器里。</p>
+        </div>
+        <form id="salary-form" class="controls-grid">
+          <label class="field">
+            <span>月薪</span>
+            <div class="input-wrap">
+              <span class="prefix" aria-hidden="true">¥</span>
+              <input id="monthlySalary" name="monthlySalary" type="number" min="0" step="100" placeholder="12000" aria-label="月薪" />
+            </div>
+          </label>
+
+          <label class="field">
+            <span>上班时间</span>
+            <input id="startTime" name="startTime" type="time" value="09:00" />
+          </label>
+
+          <label class="field">
+            <span>下班时间</span>
+            <input id="endTime" name="endTime" type="time" value="18:00" />
+          </label>
+
+          <div class="form-actions">
+            <button id="startButton" class="primary-button" type="submit">完成设置</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="summaryPanel" class="panel summary-panel is-hidden">
+        <article class="metric-card accent-card">
+          <div class="summary-header">
+            <p>今日上班进度</p>
+            <button id="editButton" class="ghost-button" type="button">编辑</button>
+          </div>
+
+          <div class="summary-values">
+            <strong id="todayProgressText">0%</strong>
+            <div class="income-block">
+              <span>今日收入</span>
+              <strong id="todayEarnedText">¥0.00</strong>
+            </div>
+          </div>
+
+          <div class="progress-track">
+            <div id="todayProgressBar" class="progress-fill"></div>
+          </div>
+
+          <p id="todayStatusText" class="metric-caption">设置完成后开始计时</p>
+
+          <div class="month-line">
+            <span>当月累计</span>
+            <strong id="monthEarnedText">¥0.00</strong>
+          </div>
+
+          <div class="summary-meta">
+            <span id="dailyTargetText">今日目标 ¥0.00</span>
+            <span id="monthWorkdayText">本月工作日 0 天</span>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+  </html>

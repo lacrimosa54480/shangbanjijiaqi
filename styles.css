@@ -1,0 +1,348 @@
+:root {
+  --bg: #f4efe7;
+  --bg-accent: #e7f3ef;
+  --panel: rgba(255, 252, 247, 0.88);
+  --panel-strong: #fff8f0;
+  --line: rgba(77, 61, 47, 0.12);
+  --text: #1d1a16;
+  --muted: #6e6358;
+  --deep-green: #1d6b57;
+  --mint: #74c7a5;
+  --warm: #d77d46;
+  --warm-soft: #f0c2a7;
+  --cool: #3d7ea6;
+  --cool-soft: #add5ea;
+  --shadow: 0 24px 60px rgba(89, 62, 29, 0.12);
+  --radius-xl: 28px;
+  --radius-lg: 20px;
+  --radius-md: 16px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Noto Sans SC", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255, 223, 181, 0.9), transparent 28%),
+    radial-gradient(circle at top right, rgba(140, 205, 183, 0.72), transparent 24%),
+    linear-gradient(180deg, #f6f1e8 0%, #f0ebe4 46%, #e8f3ef 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.page-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.hero {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  line-height: 0.95;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(16px);
+}
+
+.controls-panel,
+.summary-panel {
+  padding: 24px;
+}
+
+.is-hidden {
+  display: none;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.section-title p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
+.controls-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.form-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field span {
+  font-size: 0.94rem;
+  color: var(--muted);
+}
+
+.field input {
+  width: 100%;
+  height: 56px;
+  padding: 0 16px;
+  border: 1px solid rgba(34, 28, 22, 0.08);
+  border-radius: var(--radius-md);
+  background: var(--panel-strong);
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.field input:focus {
+  outline: 2px solid rgba(29, 107, 87, 0.18);
+  border-color: rgba(29, 107, 87, 0.28);
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap .prefix {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  color: var(--muted);
+}
+
+.input-wrap input {
+  padding-left: 36px;
+}
+
+.primary-button,
+.ghost-button {
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.primary-button:hover,
+.ghost-button:hover {
+  transform: translateY(-1px);
+}
+
+.primary-button {
+  min-width: 144px;
+  height: 52px;
+  padding: 0 24px;
+  background: linear-gradient(90deg, var(--deep-green), #22866d);
+  color: #fff;
+  font-weight: 700;
+}
+
+.summary-panel {
+  margin-top: 20px;
+}
+
+.metric-card {
+  padding: 24px;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(116, 199, 165, 0.18), rgba(255, 255, 255, 0.84)),
+    var(--panel);
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.summary-header p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.ghost-button {
+  height: 40px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--deep-green);
+  border: 1px solid rgba(29, 107, 87, 0.12);
+}
+
+.summary-values {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-top: 18px;
+}
+
+.summary-values > strong,
+.income-block strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+}
+
+.income-block {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.income-block span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.metric-caption,
+.metric-inline {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.metric-inline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.metric-inline strong {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.05rem;
+}
+
+.progress-track {
+  position: relative;
+  height: 16px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(29, 107, 87, 0.1);
+}
+
+.progress-track.subtle {
+  background: rgba(33, 28, 23, 0.08);
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--deep-green), var(--mint));
+  transition: width 0.6s ease;
+}
+
+.progress-fill.warm {
+  background: linear-gradient(90deg, var(--warm), var(--warm-soft));
+}
+
+.month-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(39, 31, 24, 0.1);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.month-line strong {
+  color: var(--text);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.05rem;
+}
+
+.summary-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+@media (max-width: 900px) {
+  .controls-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-values {
+    align-items: baseline;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell {
+    width: min(100% - 20px, 1120px);
+    padding: 20px 0 36px;
+  }
+
+  .controls-panel,
+  .summary-panel,
+  .metric-card {
+    padding: 18px;
+    border-radius: 22px;
+  }
+
+  .summary-values {
+    gap: 14px;
+  }
+
+  .income-block {
+    gap: 8px;
+  }
+
+  .month-line {
+    flex-wrap: wrap;
+  }
+
+  .form-actions {
+    justify-content: stretch;
+  }
+
+  .primary-button {
+    width: 100%;
+  }
+}
